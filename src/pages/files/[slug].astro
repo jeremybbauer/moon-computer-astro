@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post, allPosts: posts },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+  allPosts: CollectionEntry<'posts'>[];
+}
+
+const { post, allPosts } = Astro.props;
+const { Content } = await post.render();
+
+function fmtDate(d: Date) {
+  return d.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' });
+}
+
+const relatedPosts = (post.data.related ?? [])
+  .map((slug) => allPosts.find((p) => p.slug === slug))
+  .filter((p): p is CollectionEntry<'posts'> => Boolean(p));
+---
+<BaseLayout title={`${post.data.title}.${post.data.ext} — MOON COMPUTER.SPACE`} description={post.data.excerpt}>
+  <div class="detail-bar">
+    <div class="wrap">
+      <a href="/" class="back-btn">&larr; back to archive</a>
+      <span style="color:var(--ash-dim)">{post.data.title}.{post.data.ext}</span>
+    </div>
+  </div>
+
+  <div class="wrap detail-flicker">
+    <p class="post-meta">.{post.data.ext} &nbsp;&middot;&nbsp; {fmtDate(post.data.pubDate)}</p>
+    <h1 class="post-title">{post.data.title}</h1>
+
+    <div class="post-thumb">
+      {post.data.image ? <img src={post.data.image} alt="" /> : '[ image file ]'}
+    </div>
+
+    <div class="post-body">
+      <Content />
+    </div>
+
+    {relatedPosts.length > 0 && (
+      <div class="related">
+        <p class="related-label">Linked files</p>
+        {relatedPosts.map((r) => (
+          <a href={`/files/${r.slug}`} class="related-link">&rarr; {r.data.title}.{r.data.ext}</a>
+        ))}
+      </div>
+    )}
+  </div>
+</BaseLayout>
