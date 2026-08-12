@@ -6,7 +6,7 @@ const posts = defineCollection({
     title: z.string(),
     // the "file extension" category — .hro, .mnstr, .moon, .w1z, or any new one you invent later
     ext: z.string(),
-    pubDate: z.date(),
+    pubDate: z.coerce.date(),
     // short teaser shown in the directory listing
     excerpt: z.string(),
     // path to an image in /public/images/posts/, e.g. "/images/posts/cowboy-dogs.jpg"
