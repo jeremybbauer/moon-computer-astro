@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: YOUR-GITHUB-USERNAME/moon-computer # <-- update this after you push to GitHub
+  repo: jeremybbauer/moon-computer-astro # <-- update this after you push to GitHub
   branch: main
 
 media_folder: "public/images/posts"
