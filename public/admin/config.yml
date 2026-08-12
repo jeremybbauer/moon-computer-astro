@@ -16,8 +16,8 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - label: "File type"
         name: "ext"
-        widget: "select"
-        hint: "This becomes the file extension shown on the site (e.g. .hro)"
+        widget: "string"
+        hint: "This becomes the file extension shown on the site (e.g. hro, mnstr, rtf — or invent a new one)"
         options: ["hro", "mnstr", "moon", "w1z"]
       - { label: "Date", name: "pubDate", widget: "datetime", format: "YYYY-MM-DD" }
       - { label: "Excerpt", name: "excerpt", widget: "text", hint: "Shown in the archive listing" }

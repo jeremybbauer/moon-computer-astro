@@ -1,6 +1,6 @@
 ---
 title: Liquid Glass
-ext: misc
+ext: hro
 pubDate: '2020-01-15'
 excerpt: '"She came to us because her perspiration is…liquid glass? Is that right?
   Hm. Well, it can’t be as bad as the guy that keeps throwing up bees.” “He has a
