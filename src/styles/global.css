@@ -130,6 +130,14 @@ nav a:hover, nav a.active{color:var(--amber);}
   display:grid; grid-template-columns:56px 1fr auto; gap:16px; align-items:start;
   padding:20px 0; border-bottom:1px solid var(--panel-border);
   text-decoration:none; color:inherit;
+  opacity:0; transform:translateY(14px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.entry.in-view{
+  opacity:1; transform:translateY(0);
+}
+@media (prefers-reduced-motion: reduce){
+  .entry{ opacity:1; transform:none; transition:none; }
 }
 .entry:hover{text-decoration:none;}
 .entry:hover .entry-title{color:var(--amber);}
