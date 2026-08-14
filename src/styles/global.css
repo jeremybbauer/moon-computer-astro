@@ -98,6 +98,14 @@ nav a:hover, nav a.active{color:var(--amber);}
 
 /* ---------- directory listing ---------- */
 .listing{padding:6px 0 40px;}
+#listing {
+  transition: opacity 0.15s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  #listing {
+    transition: none;
+  }
+}
 .entry{
   display:grid; grid-template-columns:56px 1fr auto; gap:16px; align-items:start;
   padding:20px 0; border-bottom:1px solid var(--panel-border);
