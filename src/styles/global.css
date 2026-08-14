@@ -95,7 +95,16 @@ nav a:hover, nav a.active{color:var(--amber);}
 }
 .filter-btn:hover{border-color:var(--amber-dim); color:var(--ash); text-decoration:none;}
 .filter-btn.active{border-color:var(--amber); color:var(--amber); background:rgba(237,114,240,0.10);}
-
+.load-more-wrap{
+  text-align:center;
+  padding:10px 0 30px;
+}
+.load-more-btn{
+  background:transparent; border:1px solid var(--panel-border); color:var(--ash-dim);
+  padding:10px 20px; border-radius:2px; cursor:pointer; letter-spacing:0.03em;
+  font-family:var(--mono); font-size:12px;
+}
+.load-more-btn:hover{border-color:var(--amber-dim); color:var(--ash);}
 /* ---------- directory listing ---------- */
 .listing{padding:6px 0 40px;}
 #listing {
