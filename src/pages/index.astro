@@ -51,6 +51,7 @@ function fmtDate(d: Date) {
 
 <script>
   const filtersEl = document.getElementById('filters');
+  const listingEl = document.getElementById('listing');
   const entries = Array.from(document.querySelectorAll('.entry'));
 
   filtersEl?.addEventListener('click', (e) => {
@@ -60,9 +61,15 @@ function fmtDate(d: Date) {
     filtersEl.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
     btn.classList.add('active');
     const ext = btn.dataset.ext;
-    entries.forEach((entry) => {
-      const el = entry as HTMLElement;
-      el.style.display = ext === 'all' || el.dataset.ext === ext ? '' : 'none';
-    });
+
+    if (listingEl) listingEl.style.opacity = '0';
+
+    window.setTimeout(() => {
+      entries.forEach((entry) => {
+        const el = entry as HTMLElement;
+        el.style.display = ext === 'all' || el.dataset.ext === ext ? '' : 'none';
+      });
+      if (listingEl) listingEl.style.opacity = '1';
+    }, 150);
   });
 </script>
