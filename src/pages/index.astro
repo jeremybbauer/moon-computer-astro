@@ -30,7 +30,7 @@ function fmtDate(d: Date) {
     <div class="listing" id="listing">
       {allPosts.map((post) => (
         <a href={`/files/${post.slug}`} class="entry" data-ext={post.data.ext}>
-          <span class="thumb" aria-hidden="true">
+          <span class="thumb" aria-hidden="true" transition:name={`post-image-${post.slug}`}>
             {post.data.image ? <img src={post.data.image} alt="" loading="lazy" /> : `.${post.data.ext.toUpperCase()}`}
           </span>
           <span class="entry-body">

@@ -1,9 +1,8 @@
 ---
 title: 4p0cryph4.com
-ext: rtf
-pubDate: '2017-10-31'
-excerpt: The only way to defeat these demons is to become one. Don’t worry. This is
-  the fun part…
+ext: moon
+pubDate: 2017-10-31
+excerpt: The only way to defeat these demons is to become one. Don’t worry. This is the fun part…
 image: https://res.cloudinary.com/mooncomputer/image/upload/v1561927783/Moon%20Computer%20Blog/RTF/4p0cryph4/4p0cryph4-1.png
 ---
 

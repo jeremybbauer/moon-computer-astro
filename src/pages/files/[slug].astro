@@ -38,7 +38,7 @@ const relatedPosts = (post.data.related ?? [])
     <p class="post-meta">.{post.data.ext} &nbsp;&middot;&nbsp; {fmtDate(post.data.pubDate)}</p>
     <h1 class="post-title">{post.data.title}</h1>
 
-    <div class="post-thumb">
+    <div class="post-thumb" transition:name={`post-image-${post.slug}`}>
       {post.data.image ? <img src={post.data.image} alt="" /> : '[ image file ]'}
     </div>
 

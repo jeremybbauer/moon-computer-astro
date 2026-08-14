@@ -34,3 +34,19 @@ collections:
         hint: "Optional — link this to other posts, e.g. for a serial"
       - { label: "Hide from site", name: "draft", widget: "boolean", default: false, required: false }
       - { label: "Story", name: "body", widget: "markdown" }
+          summary: "{{title}} — .{{fields.ext}} — {{pubDate}}"
+          sortable_fields:
+            fields: [pubDate, title]
+            default:
+              field: pubDate
+              direction: descending
+          view_groups:
+            field: ext
+          view_filters:
+            - { label: "Horror (.hro)", field: ext, pattern: hro }
+            - { label: "Monsters (.mnstr)", field: ext, pattern: mnstr }
+            - { label: "Moon (.moon)", field: ext, pattern: moon }
+            - { label: "Wizard (.w1z)", field: ext, pattern: w1z }
+            - { label: "RTF (.rtf)", field: ext, pattern: rtf }
+      
+      
