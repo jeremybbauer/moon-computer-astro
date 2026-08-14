@@ -14,8 +14,8 @@ function fmtDate(d: Date) {
 <BaseLayout title="MOON COMPUTER.SPACE">
   <div class="wrap">
     <section class="hero">
-      <span class="sparkle" style="top:8px; right:14%;">✦</span>
-      <span class="sparkle" style="bottom:18px; right:2%; font-size:10px;">✦</span>
+      <span class="sparkle" style="top:8px; right:14%; animation-delay:0s;">✦</span>
+<span class="sparkle" style="bottom:18px; right:2%; font-size:10px; animation-delay:1.4s;">✦</span>
       <p class="eyebrow">// found files</p>
       <h1>A computer in the woods. You feel the glow under your skin.</h1>
     </section>
@@ -97,6 +97,15 @@ function fmtDate(d: Date) {
 
   loadMoreBtn?.addEventListener('click', () => {
     visibleCount += PAGE_SIZE;
+  const observer = new IntersectionObserver((items) => {
+      items.forEach((item) => {
+        if (item.isIntersecting) {
+          item.target.classList.add('in-view');
+        }
+      });
+    }, { threshold: 0.1 });
+  
+    entries.forEach((el) => observer.observe(el));
     render();
   });
 
