@@ -91,21 +91,33 @@ function fmtDate(d: Date) {
     if (listingEl) listingEl.style.opacity = '0';
     window.setTimeout(() => {
       render();
+  checkInView();
+  window.addEventListener('load', checkInView);
       if (listingEl) listingEl.style.opacity = '1';
     }, 150);
   });
 
   loadMoreBtn?.addEventListener('click', () => {
     visibleCount += PAGE_SIZE;
+   function checkInView() {
+    entries.forEach((el) => {
+      if (el.style.display === 'none' || el.classList.contains('in-view')) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        el.classList.add('in-view');
+      }
+    });
+  }
+
   const observer = new IntersectionObserver((items) => {
-      items.forEach((item) => {
-        if (item.isIntersecting) {
-          item.target.classList.add('in-view');
-        }
-      });
-    }, { threshold: 0.1 });
-  
-    entries.forEach((el) => observer.observe(el));
+    items.forEach((item) => {
+      if (item.isIntersecting) {
+        item.target.classList.add('in-view');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  entries.forEach((el) => observer.observe(el));
     render();
   });
 
