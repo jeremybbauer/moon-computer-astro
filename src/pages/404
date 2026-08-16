@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="File Not Found — MOON COMPUTER.SPACE">
+  <div class="wrap">
+    <section class="hero">
+      <p class="eyebrow">// error</p>
+      <h1>FILE NOT FOUND</h1>
+    </section>
+    <div class="post-body detail-flicker" style="padding:34px 0 60px;">
+      <p>The file you're looking for isn't in the archive. It may have been deleted, corrupted, or...otherwise made nonexistant due to other types of editing.</p>
+      <p><a href="/">&larr; back to the archive</a></p>
+    </div>
+  </div>
+</BaseLayout>

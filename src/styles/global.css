@@ -60,8 +60,14 @@ header{
 .brand-mark{
   width:30px; height:30px; border-radius:50%;
   background:radial-gradient(circle at 35% 30%, #fcf3ec, #fad0ab 45%, #ed72f0 100%);
-  box-shadow:0 0 10px rgba(237,114,240,0.35);
-  flex-shrink:0;
+  animation: brand-glow 4s ease-in-out infinite;
+}
+@keyframes brand-glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(237,114,240,0.35); }
+  50% { box-shadow: 0 0 18px rgba(237,114,240,0.6); }
+}
+@media (prefers-reduced-motion: reduce){
+  .brand-mark{ animation: none; box-shadow: 0 0 10px rgba(237,114,240,0.35); }
 }
 .brand-name{
   font-family:var(--mono); font-weight:700; letter-spacing:0.04em;
@@ -80,6 +86,24 @@ nav a:hover, nav a.active{color:var(--amber);}
 .hero h1{
   font-family:var(--serif); font-weight:500; font-size:clamp(26px,4vw,38px);
   line-height:1.25; margin:0; color:var(--ash); max-width:20ch;
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  top:-60px; left:50%;
+  width:400px; height:400px;
+  background: radial-gradient(circle, rgba(237,114,240,0.18) 0%, transparent 70%);
+  transform: translateX(-50%);
+  pointer-events:none;
+  z-index:-1;
+  animation: ambient-glow 6s ease-in-out infinite;
+}
+@keyframes ambient-glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce){
+  .hero::before{ animation: none; opacity: 0.7; }
 }
 .sparkle{
   position:absolute; color:#e3b8d6; font-size:14px; pointer-events:none; user-select:none;
