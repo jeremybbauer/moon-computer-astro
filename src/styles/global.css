@@ -81,7 +81,18 @@ nav a:hover, nav a.active{color:var(--amber);}
   font-family:var(--serif); font-weight:500; font-size:clamp(26px,4vw,38px);
   line-height:1.25; margin:0; color:var(--ash); max-width:20ch;
 }
-.sparkle{position:absolute; color:#e3b8d6; font-size:14px; pointer-events:none; user-select:none;}
+.sparkle{
+  position:absolute; color:#e3b8d6; font-size:14px; pointer-events:none; user-select:none;
+  animation: sparkle-twinkle 3s ease-in-out infinite;
+}
+@keyframes sparkle-twinkle {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce){
+  .sparkle{ animation: none; opacity: 0.7; }
+}
+
 
 /* ---------- filters ---------- */
 .filters{
@@ -95,13 +106,38 @@ nav a:hover, nav a.active{color:var(--amber);}
 }
 .filter-btn:hover{border-color:var(--amber-dim); color:var(--ash); text-decoration:none;}
 .filter-btn.active{border-color:var(--amber); color:var(--amber); background:rgba(237,114,240,0.10);}
-
+.load-more-wrap{
+  text-align:center;
+  padding:10px 0 30px;
+}
+.load-more-btn{
+  background:transparent; border:1px solid var(--panel-border); color:var(--ash-dim);
+  padding:10px 20px; border-radius:2px; cursor:pointer; letter-spacing:0.03em;
+  font-family:var(--mono); font-size:12px;
+}
+.load-more-btn:hover{border-color:var(--amber-dim); color:var(--ash);}
 /* ---------- directory listing ---------- */
 .listing{padding:6px 0 40px;}
+#listing {
+  transition: opacity 0.15s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  #listing {
+    transition: none;
+  }
+}
 .entry{
   display:grid; grid-template-columns:56px 1fr auto; gap:16px; align-items:start;
   padding:20px 0; border-bottom:1px solid var(--panel-border);
   text-decoration:none; color:inherit;
+  opacity:0; transform:translateY(14px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.entry.in-view{
+  opacity:1; transform:translateY(0);
+}
+@media (prefers-reduced-motion: reduce){
+  .entry{ opacity:1; transform:none; transition:none; }
 }
 .entry:hover{text-decoration:none;}
 .entry:hover .entry-title{color:var(--amber);}

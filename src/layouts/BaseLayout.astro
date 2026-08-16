@@ -20,6 +20,12 @@ const { title, description = "A computer in the woods. You feel the glow under y
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet" />
   <ClientRouter />
+<style>
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.5s;
+  }
+</style>
 </head>
 <body>
   <div class="scanlines" aria-hidden="true"></div>
@@ -45,7 +51,7 @@ const { title, description = "A computer in the woods. You feel the glow under y
       <p class="sysinfo-title">System Info</p>
       <div class="sysinfo">
         <div>Archive maintained by <strong>Jeremy Bauer</strong></div>
-        <div>All stories, text &amp; images &copy; Jeremy Bauer, 2017&ndash;present</div>
+        <div>All stories, text, and images &copy; Jeremy Bauer, 2017&ndash;present</div>
         <div>Contact / inquiries: <a href="/contact">see CONTACT</a></div>
       </div>
     </div>
