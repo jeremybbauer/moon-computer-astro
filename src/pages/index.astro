@@ -52,77 +52,76 @@ function fmtDate(d: Date) {
 </BaseLayout>
 
 <script>
-  const PAGE_SIZE = 10;
-  const filtersEl = document.getElementById('filters');
-  const listingEl = document.getElementById('listing');
-  const loadMoreWrap = document.getElementById('loadMoreWrap');
-  const loadMoreBtn = document.getElementById('loadMoreBtn');
-  const entries = Array.from(document.querySelectorAll('.entry')) as HTMLElement[];
+  document.addEventListener('astro:page-load', () => {
+    console.log('page-load fired, entries found:',
+  document.querySelectorALL('.entry').length);
+    const PAGE_SIZE = 10;
+    const filtersEl = document.getElementById('filters');
+    const listingEl = document.getElementById('listing');
+    const loadMoreWrap = document.getElementById('loadMoreWrap');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    const entries = Array.from(document.querySelectorAll('.entry')) as HTMLElement[];
 
-  let currentExt = 'all';
-  let visibleCount = PAGE_SIZE;
+    let currentExt = 'all';
+    let visibleCount = PAGE_SIZE;
 
-  function matches(el: HTMLElement) {
-    return currentExt === 'all' || el.dataset.ext === currentExt;
-  }
-
-  function render() {
-    const matching = entries.filter(matches);
-    entries.forEach((el) => {
-      el.style.display = 'none';
-    });
-    matching.slice(0, visibleCount).forEach((el) => {
-      el.style.display = '';
-    });
-    if (loadMoreWrap) {
-      loadMoreWrap.style.display = matching.length > visibleCount ? '' : 'none';
+    function matches(el: HTMLElement) {
+      return currentExt === 'all' || el.dataset.ext === currentExt;
     }
-  }
 
-  function checkInView() {
-    entries.forEach((el) => {
-      if (el.style.display === 'none' || el.classList.contains('in-view')) return;
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight) {
-        el.classList.add('in-view');
+    function render() {
+      const matching = entries.filter(matches);
+      entries.forEach((el) => { el.style.display = 'none'; });
+      matching.slice(0, visibleCount).forEach((el) => { el.style.display = ''; });
+      if (loadMoreWrap) {
+        loadMoreWrap.style.display = matching.length > visibleCount ? '' : 'none';
       }
+    }
+
+    function checkInView() {
+      entries.forEach((el) => {
+        if (el.style.display === 'none' || el.classList.contains('in-view')) return;
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight) {
+          el.classList.add('in-view');
+        }
+      });
+    }
+
+    const observer = new IntersectionObserver((items) => {
+      items.forEach((item) => {
+        if (item.isIntersecting) {
+          item.target.classList.add('in-view');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    entries.forEach((el) => observer.observe(el));
+
+    filtersEl?.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest('.filter-btn') as HTMLElement | null;
+      if (!btn) return;
+      e.preventDefault();
+      filtersEl.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentExt = btn.dataset.ext || 'all';
+      visibleCount = PAGE_SIZE;
+
+      if (listingEl) listingEl.style.opacity = '0';
+      window.setTimeout(() => {
+        render();
+        checkInView();
+        if (listingEl) listingEl.style.opacity = '1';
+      }, 150);
     });
-  }
 
-  const observer = new IntersectionObserver((items) => {
-    items.forEach((item) => {
-      if (item.isIntersecting) {
-        item.target.classList.add('in-view');
-      }
-    });
-  }, { threshold: 0.1 });
-
-  entries.forEach((el) => observer.observe(el));
-
-  filtersEl?.addEventListener('click', (e) => {
-    const btn = (e.target as HTMLElement).closest('.filter-btn') as HTMLElement | null;
-    if (!btn) return;
-    e.preventDefault();
-    filtersEl.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentExt = btn.dataset.ext || 'all';
-    visibleCount = PAGE_SIZE;
-
-    if (listingEl) listingEl.style.opacity = '0';
-    window.setTimeout(() => {
+    loadMoreBtn?.addEventListener('click', () => {
+      visibleCount += PAGE_SIZE;
       render();
       checkInView();
-      if (listingEl) listingEl.style.opacity = '1';
-    }, 150);
-  });
+    });
 
-  loadMoreBtn?.addEventListener('click', () => {
-    visibleCount += PAGE_SIZE;
     render();
     checkInView();
   });
-
-  render();
-  checkInView();
-  window.addEventListener('load', checkInView);
 </script>
