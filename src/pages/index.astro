@@ -53,8 +53,6 @@ function fmtDate(d: Date) {
 
 <script>
   document.addEventListener('astro:page-load', () => {
-    console.log('page-load fired, entries found:',
-  document.querySelectorALL('.entry').length);
     const PAGE_SIZE = 10;
     const filtersEl = document.getElementById('filters');
     const listingEl = document.getElementById('listing');
