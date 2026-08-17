@@ -9,10 +9,12 @@
     "preview": "astro preview"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
     "astro": "^5.0.0"
   },
   "allowScripts": {
     "sharp@0.34.5": true,
-    "esbuild@0.25.12": true
+    "esbuild@0.27.7": true,
+    "fsevents@2.3.3": true
   }
 }
